@@ -2,33 +2,85 @@ package tabla;
 
 import java.util.Random;
 
+import tabla.sistemskeoperacije.SOOznacavanjePolja;
+import tabla.sistemskeoperacije.SOPostavljanjeMina;
+import tabla.sistemskeoperacije.SOPritisnutoPolje;
+
 public class Tabla {
 	
-	private Polje [][] polja;
-	
-	
-	public Tabla(int dimX, int dimY, int brMina) {
-		polja = new Polje[dimX][dimY];
-		int brPostMina=0;
-		int x,y;
-		Random rand = new Random();
+	public Polje [][] polja;
+	public int brOtvorenih;
+	public int brPreostalih;
+	private int dimX;
+	private int dimY;
 
-		for(x=0;x<dimX;x++)
-		for(y=0;y<dimY;y++)
+	public Tabla(int dimX, int dimY, int brMina) {
+		this.dimX=dimX;
+		this.dimY=dimY;
+		brOtvorenih = 0;
+		brPreostalih = dimX*dimY-brMina;
+		polja = new Polje[dimX][dimY];
+		
+		if(brMina>dimX*dimY)
+			brMina=dimX*dimY;
+
+		for(int x=0;x<dimX;x++)
+		for(int y=0;y<dimY;y++)
 			polja[x][y]= new Polje();
 		
-		while(brPostMina<brMina) {
-			x=rand.nextInt(dimX);
-			y=rand.nextInt(dimY);
-			if(polja[x][y].isMina()==false) {
-				polja[x][y].setMina(true);
-				brPostMina++;
-			}
-		}
-
-		
-		
+		SOPostavljanjeMina.izvrsi(dimX, dimY, brMina, polja);
+		SOOznacavanjePolja.izvrsi(dimX,dimY,polja);
 	}
 	
+	
+	public int getX() {
+		return dimX;
+	}
+
+	public int getY() {
+		return dimY;
+	}
+	
+	public int  pritisnutoPolje(int x, int y) {
+		return SOPritisnutoPolje.izvrsi(x,y,this);
+	}
+	
+	
+	
+	
+	
+	//privremeno
+	public void prikaz() {
+		int x,y;
+		for(y=0;y<dimY;y++) {
+			System.out.println();
+	
+			for(x=0;x<dimX;x++) {
+				if(polja[x][y].isMina())
+					System.out.print("* ");
+				else
+					System.out.print(polja[x][y].getbrMinaOkolo()+" ");
+			}
+		}
+		System.out.println("\n");
+		for(y=0;y<dimY;y++) {
+			System.out.println();
+	
+			for(x=0;x<dimX;x++) {
+				if(polja[x][y].isOtvoreno())
+					System.out.print(". ");
+				else
+					System.out.print("X ");
+			}
+		}
+	}
+	//privremeno
+	public static void main(String[] args) {
+		Tabla t = new Tabla(10,10,10);
+		t.pritisnutoPolje(0, 0);
+		t.pritisnutoPolje(5, 7);
+		t.prikaz();
+		System.out.println(t.brOtvorenih);
+	}
 
 }
