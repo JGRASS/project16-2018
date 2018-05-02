@@ -11,10 +11,12 @@ public class Tabla {
 	public int brPreostalih;
 	private int dimX;
 	private int dimY;
+	private int brMina;
 
 	public Tabla(int dimX, int dimY, int brMina) {
 		this.dimX=dimX;
 		this.dimY=dimY;
+		this.brMina=brMina;
 		brOtvorenih = 0;
 		brPreostalih = dimX*dimY-brMina;
 		polja = new Polje[dimX][dimY];
@@ -25,9 +27,7 @@ public class Tabla {
 		for(int x=0;x<dimX;x++)
 		for(int y=0;y<dimY;y++)
 			polja[x][y]= new Polje();
-		
-		SOPostavljanjeMina.izvrsi(dimX, dimY, brMina, polja);
-		SOOznacavanjePolja.izvrsi(dimX,dimY,polja);
+	
 	}
 	
 	
@@ -43,7 +43,10 @@ public class Tabla {
 		return SOPritisnutoPolje.izvrsi(x,y,this);
 	}
 	
-	
+	public void postaviMine() {
+		SOPostavljanjeMina.izvrsi(dimX, dimY, brMina, polja);
+		SOOznacavanjePolja.izvrsi(dimX,dimY,polja);	
+	}
 	
 	
 	

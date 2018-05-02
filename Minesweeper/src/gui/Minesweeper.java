@@ -41,13 +41,14 @@ import java.awt.Dimension;
 public class Minesweeper extends JFrame {
 
 	private JPanel contentPane;
-	private JButton matrica[][];
+	public JButton matrica[][];
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JTextField textPreostaliBrojMina;
 	private JTextField textField_1;
-
-	
-	
+	public JPanel panelMatrica;
+	private JRadioButtonMenuItem rdbtnmntmBeginner;
+	private JRadioButtonMenuItem rdbtnmntmIntermediate;
+	private JRadioButtonMenuItem rdbtnmntmExpert;
 	/**
 	 * Create the frame.
 	 */
@@ -62,7 +63,8 @@ public class Minesweeper extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Minesweeper.class.getResource("/icons/915944-200.png")));
 		setTitle("Minesweeper");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 566, 488);
+		setBounds(100, 100, 336, 438);
+		
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -73,6 +75,15 @@ public class Minesweeper extends JFrame {
 		JMenuItem mntmNew = new JMenuItem("New");
 		mntmNew.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				if(rdbtnmntmBeginner.isSelected())
+					GUIKontroler.novaIgra(10,10,10);
+				
+				if(rdbtnmntmIntermediate.isSelected())
+					GUIKontroler.novaIgra(20,20,40);
+				
+				if(rdbtnmntmExpert.isSelected())
+					GUIKontroler.novaIgra(40,60,100);
 			}
 		});
 		mntmNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
@@ -81,20 +92,31 @@ public class Minesweeper extends JFrame {
 		JSeparator separator = new JSeparator();
 		mnGame.add(separator);
 		
-		JRadioButtonMenuItem rdbtnmntmBeginner = new JRadioButtonMenuItem("Beginner");
+		rdbtnmntmBeginner = new JRadioButtonMenuItem("Beginner");
+		rdbtnmntmBeginner.setSelected(true);
 		rdbtnmntmBeginner.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				GUIKontroler.novaIgra(10,10,10);//ovde samo podesiti velicinu i mine, ja sam lupio neke vrednosti
 			}
 		});
 		buttonGroup.add(rdbtnmntmBeginner);
 		mnGame.add(rdbtnmntmBeginner);
 		
-		JRadioButtonMenuItem rdbtnmntmIntermediate = new JRadioButtonMenuItem("Intermediate");
+		rdbtnmntmIntermediate = new JRadioButtonMenuItem("Intermediate");
+		rdbtnmntmIntermediate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GUIKontroler.novaIgra(20,20,40);//ovde samo podesiti velicinu i mine, ja sam lupio neke vrednosti
+			}
+		});
 		buttonGroup.add(rdbtnmntmIntermediate);
 		mnGame.add(rdbtnmntmIntermediate);
 		
-		JRadioButtonMenuItem rdbtnmntmExpert = new JRadioButtonMenuItem("Expert");
+		rdbtnmntmExpert = new JRadioButtonMenuItem("Expert");
+		rdbtnmntmExpert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GUIKontroler.novaIgra(40,60,100);//ovde samo podesiti velicinu i mine, ja sam lupio neke vrednosti
+			}
+		});
 		buttonGroup.add(rdbtnmntmExpert);
 		mnGame.add(rdbtnmntmExpert);
 		
@@ -159,44 +181,54 @@ public class Minesweeper extends JFrame {
 		btnNovaIgra.setBounds(140, 5, 38, 37);
 		panel.add(btnNovaIgra);
 		
-		JPanel panelMatrica = new JPanel();
-		panelMatrica.setBounds(5, 49, 527, 378);
+		
+		
+		
+		postavljanjePolja(dimX, dimY);
+		
+		
+		}
+	
+	public void postavljanjePolja(int dimX, int dimY) {
+		
+		panelMatrica = new JPanel();
+		panelMatrica.setBounds(5, 49, 10+dimX*30, 10+dimY*30);
 		contentPane.add(panelMatrica);
 		panelMatrica.setLayout(null);
-
-		int x=0,y=0;
-		
-		matrica = new JButton[20][20];		
-		
-		for(x=0;x<dimX;x++)
-		for(y=0;y<dimY;y++) {
-			matrica[x][y] = new JButton();
-			panelMatrica.add(matrica[x][y]);
-			matrica[x][y].setLocation(10+x*30, 10+y*30);
-			matrica[x][y].setVisible(true);
-			matrica[x][y].setSize(30, 30);
-			matrica[x][y].setMargin(new Insets(2, 2, 2, 2));	
-			matrica[x][y].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e)	// levi klik za svako polje:
-				{	
-					
-					JButton dugme = (JButton)e.getSource();	//nalazi dugme koje je pozvalo event
-					dugme.setEnabled(false);
-					int x = (dugme.getX()-10)/30;//kordinate dugmeta koje ce se slati logickom delu(Tabla)
-					int y = (dugme.getY()-10)/30;
-				}
-				}
-			);
-			matrica[x][y].addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {	//desni klik za svako polje
-					JButton dugme = (JButton)e.getSource();
-					if(e.getButton()==3 && dugme.isEnabled())//posto ne postoji obican event za desni klik ovde se proverava da li je klik desni (3)
-					dugme.setIcon(new ImageIcon(Minesweeper.class.getResource("/icons/images.png")));
-				}
-			});
-		}
-		}
 	
-	
+		setSize(36+dimX*30, 125+dimY*30);
+		matrica = new JButton[dimX][dimY];
+		
+		for(int x=0;x<dimX;x++)
+		for(int y=0;y<dimY;y++) {
+				matrica[x][y] = new JButton();
+				panelMatrica.add(matrica[x][y]);
+				matrica[x][y].setLocation(10+x*30, 10+y*30);
+				matrica[x][y].setVisible(true);
+				matrica[x][y].setSize(30, 30);
+				matrica[x][y].setMargin(new Insets(2, 2, 2, 2));	
+				matrica[x][y].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e)	// levi klik za svako polje:
+					{	
+						if (GUIKontroler.getStatus() == 0) {
+							JButton dugme = (JButton) e.getSource(); // nalazi dugme koje je pozvalo event
+							dugme.setEnabled(false);
+							int x = (dugme.getX() - 10) / 30;// kordinate dugmeta koje ce se slati logickom delu(Tabla)
+							int y = (dugme.getY() - 10) / 30;
+							GUIKontroler.pritisnutoPolje(x, y);
+						}
+					}
+					}
+				);
+				matrica[x][y].addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent e) {	//desni klik za svako polje
+						JButton dugme = (JButton)e.getSource();
+						if(e.getButton()==3 && dugme.isEnabled() && GUIKontroler.getStatus() == 0)//posto ne postoji obican event za desni klik ovde se proverava da li je klik desni (3)
+						dugme.setIcon(new ImageIcon(Minesweeper.class.getResource("/icons/images.png")));
+					}
+				});
+			}
+		
+	}
 	
 }
