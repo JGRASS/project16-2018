@@ -2,6 +2,8 @@ package gui.kontroler;
 
 import java.awt.EventQueue;
 
+import javax.swing.JOptionPane;
+
 import gui.Minesweeper;
 import tabla.Tabla;
 
@@ -26,6 +28,25 @@ public class GUIKontroler {
 		});
 	}
 	
+	public static void prikaziAboutProzor(){
+		JOptionPane.showMessageDialog(ms,
+				"Pronadjite mine u minskom polju, a da ne stanete ni na jednu od njih!", "Minesweeper",
+				JOptionPane.INFORMATION_MESSAGE);
+	}
 	
+	public static void prikaziExitProzor() {
+		int opcija = JOptionPane.showConfirmDialog(ms,
+				"Da li ZAISTA zelite da izadjete iz apliacije", "Izlazak",
+				JOptionPane.YES_NO_OPTION);
+
+		if (opcija == JOptionPane.YES_OPTION)
+			System.exit(0);
+	}
+	
+	public static void prikaziInstrukcijeProzor(){
+		JOptionPane.showMessageDialog(ms, "Kliknite na polje da biste otkrili minu. Brojevi pokazuju koliko ima mina oko tog polja.",
+				"Minesweeper", JOptionPane.INFORMATION_MESSAGE);
+		
+	}
 	
 }
