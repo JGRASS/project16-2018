@@ -5,10 +5,9 @@ import tabla.Polje;
 public class SOOznacavanjePolja {
 	
 	public static void izvrsi(int dimX, int dimY, Polje[][] polja) {
-		int x,y;
 		int brMina=0;
-		for(x=0;x<dimX;x++)
-		for(y=0;y<dimY;y++)
+		for(int x=0;x<dimX;x++)
+		for(int y=0;y<dimY;y++)
 		if(polja[x][y].isMina()==false) {
 			brMina=0;
 			
@@ -24,7 +23,7 @@ public class SOOznacavanjePolja {
 			if (x > 0 && y < dimY-1 && polja[x-1][y+1].isMina())
 				brMina++;
 
-			if (y<dimY-1 &&polja[x][y+1].isMina())
+			if (y<dimY-1 && polja[x][y+1].isMina())
 				brMina++;
 
 			if (x < dimX- 1 && y > 0 && polja[x+1][y-1].isMina())

@@ -55,8 +55,8 @@ public class Minesweeper extends JFrame {
 					
 					JButton dugme = (JButton)e.getSource();	//nalazi dugme koje je pozvalo event
 					dugme.setEnabled(false);
-					int x = dugme.getX()/30;//kordinate dugmeta koje ce se slati logickom delu(Tabla)
-					int y = dugme.getY()/30;
+					int x = (dugme.getX()-10)/30;//kordinate dugmeta koje ce se slati logickom delu(Tabla)
+					int y = (dugme.getY()-10)/30;
 				}
 				}
 			);

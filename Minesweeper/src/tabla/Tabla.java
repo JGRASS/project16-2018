@@ -1,7 +1,5 @@
 package tabla;
 
-import java.util.Random;
-
 import tabla.sistemskeoperacije.SOOznacavanjePolja;
 import tabla.sistemskeoperacije.SOPostavljanjeMina;
 import tabla.sistemskeoperacije.SOPritisnutoPolje;
