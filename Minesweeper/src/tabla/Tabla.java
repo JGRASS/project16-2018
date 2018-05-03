@@ -11,7 +11,7 @@ public class Tabla {
 	public int brPreostalih;
 	private int dimX;
 	private int dimY;
-	private int brMina;
+	public int brMina;
 
 	public Tabla(int dimX, int dimY, int brMina) {
 		this.dimX=dimX;
@@ -37,6 +37,10 @@ public class Tabla {
 
 	public int getY() {
 		return dimY;
+	}
+	
+	public int getBrMina(){
+		return brMina;
 	}
 	
 	public int  pritisnutoPolje(int x, int y) {

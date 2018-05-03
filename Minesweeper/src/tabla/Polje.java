@@ -5,8 +5,17 @@ public class Polje {
 	private boolean otvoreno = false;
 	private boolean mina = false;
 	private int brMinaOkolo = 0;
+	public boolean nemaZastavu = true;
 	
 	
+	public boolean isNemaZastavu() {
+		return nemaZastavu;
+	}
+
+	public void setNemaZastavu(boolean nemaZastavu) {
+		this.nemaZastavu = nemaZastavu;
+	}
+
 	public boolean isOtvoreno() {
 		return otvoreno;
 	}
