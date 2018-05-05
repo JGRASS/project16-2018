@@ -7,16 +7,24 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
+import gui.DodajRezultatGUI;
 import gui.Minesweeper;
+import ranglista.RangLista;
+import ranglista.RangListaInterface;
+import ranglista.Rezultat;
 import tabla.Tabla;
 
 public class GUIKontroler {
 	
+	public static RangListaInterface rangLista = new RangLista();
+	public static DodajRezultatGUI dp;
 	public static Tabla tabla;
 	public static Minesweeper ms;
 	private static boolean prviPotez;
 	private static int status;
 	private static int brojPreostalih=10;
+	private static int k=0;
+	private static Timer t;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -27,12 +35,33 @@ public class GUIKontroler {
 					tabla = new Tabla(10,10,10);
 					ms = new Minesweeper(10,10);
 					ms.setVisible(true);
+					
+					
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
+	
+	public static void pokreniTimer() {
+		t = new Timer(1000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ms.lblTimer.setText(String.valueOf(k));
+				k++;
+				}
+			});		
+		t.start();
+	}
+	
+	public static void restartovanjeTimera() {
+		k=0;
+		t.stop();
+		t.start();		
+	}
+	
 	
 	public static void prikaziAboutProzor(){
 		JOptionPane.showMessageDialog(ms,
@@ -50,21 +79,22 @@ public class GUIKontroler {
 	}
 	
 	public static void prikaziInstrukcijeProzor(){
-		JOptionPane.showMessageDialog(ms, "Kliknite na polje da biste otkrili minu. Brojevi pokazuju koliko ima mina oko tog polja.",
+		 JOptionPane.showMessageDialog(ms, "Kliknite na polje da biste otkrili minu. Brojevi pokazuju koliko ima mina oko tog polja.",
 				"Minesweeper", JOptionPane.INFORMATION_MESSAGE);
 		
 	}
 	
 	public static void prikaziKrajProzor(){
 		JOptionPane.showMessageDialog(ms, "Zao nam je. Izgubili ste.",
-				"Minesweeper", JOptionPane.INFORMATION_MESSAGE);
-		novaIgra();
-		
+				"Minesweeper", JOptionPane.INFORMATION_MESSAGE);		
 	}
 	
 	public static void prikaziPobedaProzor(){
-		JOptionPane.showMessageDialog(ms, "Cestitamo! Pobedili ste.",
-				"Minesweeper", JOptionPane.INFORMATION_MESSAGE);
+		int opcija = JOptionPane.showConfirmDialog(ms, "Cestitamo! Pobedili ste. Da li zelite da unesete rezultat?",
+				"Minesweeper", JOptionPane.YES_NO_OPTION);
+		if (opcija== JOptionPane.YES_OPTION)
+			prikaziDodajRezultatGUI();
+			
 		
 	}
 	public static void novaIgra() {
@@ -92,6 +122,7 @@ public class GUIKontroler {
 			ms.repaint();
 			brojPreostalih=100;
 		}
+		restartovanjeTimera();
 	}
 	
 	
@@ -108,10 +139,12 @@ public class GUIKontroler {
 		
 		if(status==1) {//poraz
 			ms.btnNovaIgra.setIcon(new ImageIcon(Minesweeper.class.getResource("/icons/2000px-Sad_smiley_yellow_simple.svg.png")));
+			t.stop();
 			prikaziKrajProzor();
 		}
 		if(status==2) {//pobeda
-			ms.btnNovaIgra.setIcon(new ImageIcon(Minesweeper.class.getResource("/icons/s-I300.jpg")));
+			ms.btnNovaIgra.setIcon(new ImageIcon(Minesweeper.class.getResource("/icons/s-l300.jpg")));
+			t.stop();
 			prikaziPobedaProzor();
 			
 			//trebalo bi i da se doda rezultat u rang listu
@@ -197,6 +230,29 @@ public class GUIKontroler {
 		brojPreostalih++;
 	}
 	
+	public static void prikaziDodajRezultatGUI() {
+		DodajRezultatGUI prozor = new DodajRezultatGUI();
+		prozor.setLocationRelativeTo(ms);
+		prozor.setVisible(true);
+	}
+	
+	public static void unesiRezultat (int vreme, String tip, String ime, String prezime) {
+		try {
+			Rezultat rezultat = new Rezultat();
+			rezultat.setVreme(vreme);
+			rezultat.setTipIgre(tip);
+			rezultat.setIme(ime);
+			rezultat.setPrezime(prezime);
+			
+			rangLista.dodajRezultatSortirano(rezultat);
+						
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(null, e1.getMessage(),
+					"Greska", JOptionPane.ERROR_MESSAGE);
+		}
+		
+		
+	}
 	
 	
 }

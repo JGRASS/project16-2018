@@ -56,7 +56,6 @@ public class Minesweeper extends JFrame {
 	public JRadioButtonMenuItem rdbtnmntmExpert;
 	public JButton btnNovaIgra;
 	public JLabel lblTimer;
-	public int k=0;
 	
 	/**
 	 * Create the frame.
@@ -73,15 +72,8 @@ public class Minesweeper extends JFrame {
 		setTitle("Minesweeper");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 336, 438);
+		GUIKontroler.pokreniTimer();
 		
-		Timer t = new Timer(1000, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				lblTimer.setText(String.valueOf(k));
-				k++;
-				}
-			});
-		t.start();
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
@@ -100,9 +92,7 @@ public class Minesweeper extends JFrame {
 				
 				if(rdbtnmntmExpert.isSelected())
 					GUIKontroler.novaIgra();
-				k=0;
-				t.stop();
-				t.start();
+				
 			}
 		});
 		mntmNew.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
@@ -116,9 +106,6 @@ public class Minesweeper extends JFrame {
 		rdbtnmntmBeginner.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GUIKontroler.novaIgra();
-				k=0;
-				t.stop();
-				t.start();
 			}
 		});
 		buttonGroup.add(rdbtnmntmBeginner);
@@ -128,9 +115,6 @@ public class Minesweeper extends JFrame {
 		rdbtnmntmIntermediate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GUIKontroler.novaIgra();
-				k=0;
-				t.stop();
-				t.start();
 			}
 		});
 		buttonGroup.add(rdbtnmntmIntermediate);
@@ -140,9 +124,6 @@ public class Minesweeper extends JFrame {
 		rdbtnmntmExpert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GUIKontroler.novaIgra();
-				k=0;
-				t.stop();
-				t.start();
 			}
 		});
 		buttonGroup.add(rdbtnmntmExpert);
@@ -200,9 +181,6 @@ public class Minesweeper extends JFrame {
 		btnNovaIgra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GUIKontroler.novaIgra();	
-				k=0;
-				t.stop();
-				t.start();
 			}
 		});
 		btnNovaIgra.setPreferredSize(new Dimension(30, 30));
@@ -269,5 +247,9 @@ public class Minesweeper extends JFrame {
 		
 		
 	}
+	
+	
+	
+	
 	
 }
