@@ -3,7 +3,10 @@ package gui.kontroler;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
@@ -231,7 +234,14 @@ public class GUIKontroler {
 	}
 	
 	public static void prikaziDodajRezultatGUI() {
-		DodajRezultatGUI prozor = new DodajRezultatGUI();
+			String tip = null;
+			if (ms.rdbtnmntmBeginner.isSelected())
+				tip = "Beginner";
+			if (ms.rdbtnmntmIntermediate.isSelected())
+				tip = "Intermediate";
+			if (ms.rdbtnmntmExpert.isSelected())
+				tip = "Expert";		
+		DodajRezultatGUI prozor = new DodajRezultatGUI(ms.lblTimer.getText(), tip);
 		prozor.setLocationRelativeTo(ms);
 		prozor.setVisible(true);
 	}
@@ -243,7 +253,6 @@ public class GUIKontroler {
 			rezultat.setTipIgre(tip);
 			rezultat.setIme(ime);
 			rezultat.setPrezime(prezime);
-			
 			rangLista.dodajRezultatSortirano(rezultat);
 						
 		} catch (Exception e1) {
@@ -252,6 +261,42 @@ public class GUIKontroler {
 		}
 		
 		
+	}
+	
+	public static String vlatiListuPrikaz() {
+		return rangLista.prikaziListu();		
+	}
+	
+	public static void sacuvajUFajl(){
+		JFileChooser fc = new JFileChooser();
+		int returnVal = fc.showSaveDialog(null);
+
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			File file = fc.getSelectedFile();
+			
+			try {
+			rangLista.sacuvajUFajl(file.getAbsolutePath());
+			} catch (Exception e1) {
+					JOptionPane.showMessageDialog(ms, e1.getMessage(),
+							"Greska", JOptionPane.ERROR_MESSAGE);
+			}
+		}
+		
+	}
+	
+	public static void ucitajIzFajla() {
+		try {
+			JFileChooser fc = new JFileChooser();
+			int returnVal = fc.showOpenDialog(null);
+
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				File file = fc.getSelectedFile();
+				rangLista.ucitajIzFajla(file.getAbsolutePath());
+			}	
+		} catch (Exception e1) {
+			JOptionPane.showMessageDialog(ms, e1.getMessage(),
+					"Greska", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	

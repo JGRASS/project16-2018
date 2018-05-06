@@ -7,4 +7,7 @@ public interface RangListaInterface {
 	public Rezultat[] vratiRangListu();
 	
 	public String prikaziListu();
+	
+	public void ucitajIzFajla(String putanja);
+	public void sacuvajUFajl(String putanja);
 }

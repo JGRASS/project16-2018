@@ -22,8 +22,7 @@ public class SODodajRezultat {
 		if (brRezultata==0) {
 			rangLista[0]=rezultat;
 			brRezultata++;
-			return;
-			
+			return;			
 		}
 		if (rezultat.getVreme()<rangLista[brRezultata-1].getVreme())
 			for(int i=0; i<brRezultata; i++) {

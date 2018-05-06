@@ -15,12 +15,13 @@ import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
 import gui.kontroler.GUIKontroler;
-import ranglista.RangLista;
-import ranglista.RangListaInterface;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
+import java.awt.FlowLayout;
 
 public class DodajRezultatGUI extends JFrame {
 
@@ -35,19 +36,20 @@ public class DodajRezultatGUI extends JFrame {
 	private JTextField textFieldPrezime;
 	private JScrollPane scrollPane;
 	public JTextArea textAreaRangLista;
-	public static RangListaInterface rangLista = new RangLista();
-	public static Minesweeper ms;
 	private JButton btnDodaj;
+	private JPanel panel;
+	private JButton btnUcitajIzFajla;
+	private JButton btnSacuvajUFajl;
 
 	/**
 	 * Create the frame.
 	 */
-	public DodajRezultatGUI() {
-		setTitle("Upisivanje rezultata");
+	public DodajRezultatGUI(String vreme, String tipIgre) {
 		setResizable(false);
+		setTitle("Upisivanje rezultata");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(DodajRezultatGUI.class.getResource("/icons/Throphy-512.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 321, 366);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 453, 461);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -61,6 +63,10 @@ public class DodajRezultatGUI extends JFrame {
 		contentPane.add(getLblPrezime());
 		contentPane.add(getTextFieldPrezime());
 		contentPane.add(getScrollPane());
+		textFieldVreme.setText(vreme);
+		textFieldTipIgre.setText(tipIgre);
+		contentPane.add(getPanel());
+		
 	}
 	
 	private JLabel getLblVreme() {
@@ -73,6 +79,7 @@ public class DodajRezultatGUI extends JFrame {
 	private JTextField getTextFieldVreme() {
 		if (textFieldVreme == null) {
 			textFieldVreme = new JTextField();
+			textFieldVreme.setEditable(false);
 			textFieldVreme.setBounds(162, 5, 147, 25);
 			textFieldVreme.setColumns(10);
 			
@@ -89,15 +96,9 @@ public class DodajRezultatGUI extends JFrame {
 	private JTextField getTextFieldTipIgre() {
 		if (textFieldTipIgre == null) {
 			textFieldTipIgre = new JTextField();
+			textFieldTipIgre.setEditable(false);
 			textFieldTipIgre.setBounds(162, 40, 147, 25);
 			textFieldTipIgre.setColumns(10);
-			/*if (ms.rdbtnmntmBeginner.isSelected())
-				textFieldTipIgre.setText("Beginner");
-			if (ms.rdbtnmntmIntermediate.isSelected())
-				textFieldTipIgre.setText("Intermediate");
-			if (ms.rdbtnmntmExpert.isSelected())
-				textFieldTipIgre.setText("Expert");
-			*/
 		}
 		return textFieldTipIgre;
 	}
@@ -134,7 +135,7 @@ public class DodajRezultatGUI extends JFrame {
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
-			scrollPane.setBounds(5, 146, 300, 181);
+			scrollPane.setBounds(5, 182, 432, 240);
 			scrollPane.setViewportView(getTextAreaRangLista());
 			scrollPane.setColumnHeaderView(getBtnDodaj());
 		}
@@ -143,7 +144,8 @@ public class DodajRezultatGUI extends JFrame {
 	private JTextArea getTextAreaRangLista() {
 		if (textAreaRangLista == null) {
 			textAreaRangLista = new JTextArea();
-			textAreaRangLista.setBorder(new TitledBorder(null, "Rang lista", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			textAreaRangLista.setText("Mesto:  Vreme:   Tip igre:       Ime:          Prezime:");
+			textAreaRangLista.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Rang lista", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		}
 		return textAreaRangLista;
 	}
@@ -154,10 +156,44 @@ public class DodajRezultatGUI extends JFrame {
 				public void actionPerformed(ActionEvent arg0) {
 					GUIKontroler.unesiRezultat(Integer.parseInt(textFieldVreme.getText()), textFieldTipIgre.getText(), 
 							textFieldIme.getText(), textFieldPrezime.getText());
-					textAreaRangLista.setText(rangLista.prikaziListu());
+					String text = textAreaRangLista.getText();
+					textAreaRangLista.setText(text + "\n"+GUIKontroler.vlatiListuPrikaz());
 				}
 			});
 		}
 		return btnDodaj;
+	}
+	private JPanel getPanel() {
+		if (panel == null) {
+			panel = new JPanel();
+			panel.setBounds(5, 146, 432, 33);
+			panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+			panel.add(getButton_1());
+			panel.add(getButton_2());
+		}
+		return panel;
+	}
+	private JButton getButton_1() {
+		if (btnUcitajIzFajla == null) {
+			btnUcitajIzFajla = new JButton("Ucitaj iz fajla");
+			btnUcitajIzFajla.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					GUIKontroler.ucitajIzFajla();
+					textAreaRangLista.setText(GUIKontroler.vlatiListuPrikaz());
+				}
+			});
+		}
+		return btnUcitajIzFajla;
+	}
+	private JButton getButton_2() {
+		if (btnSacuvajUFajl == null) {
+			btnSacuvajUFajl = new JButton("Sacuvaj u fajl");
+			btnSacuvajUFajl.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					GUIKontroler.sacuvajUFajl();
+				}
+			});
+		}
+		return btnSacuvajUFajl;
 	}
 }
