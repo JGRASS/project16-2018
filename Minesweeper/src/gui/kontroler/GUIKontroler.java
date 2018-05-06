@@ -1,5 +1,6 @@
 package gui.kontroler;
 
+
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+
 
 import gui.DodajRezultatGUI;
 import gui.Minesweeper;
@@ -131,15 +133,15 @@ public class GUIKontroler {
 	
 	public static void pritisnutoPolje(int xp, int yp) {
 		if(prviPotez) {
-			tabla.postaviMine();
+			tabla.postaviMine(xp,yp);
 			prviPotez=false;
 		}
-		
+		status=0;
 		if(status==0) {
 			status = tabla.pritisnutoPolje(xp, yp);
 			
 		}
-		
+
 		if(status==1) {//poraz
 			ms.btnNovaIgra.setIcon(new ImageIcon(Minesweeper.class.getResource("/icons/2000px-Sad_smiley_yellow_simple.svg.png")));
 			t.stop();
@@ -160,51 +162,55 @@ public class GUIKontroler {
 	
 	
 	private static void azurirajGUI() {
+
+		
 		for(int x=0; x<tabla.getX();x++)
 		for(int y=0; y<tabla.getY();y++) {
 			
-			if(status==0 && tabla.polja[x][y].isOtvoreno()) {
-				ms.matrica[x][y].setEnabled(false);
-				if(tabla.polja[x][y].getbrMinaOkolo()!=0){
+			if(status==0 && tabla.polja[x][y].isOtvoreno()) {{
+				
+
+				try {
+					ms.matrica[x][y].removeActionListener(ms.matrica[x][y].getActionListeners()[0]);//ovo se koristi umesto disable zato
+					ms.matrica[x][y].removeMouseListener(ms.matrica[x][y].getMouseListeners()[0]);//sto disable skida boju slova
+					ms.matrica[x][y].removeMouseListener(ms.matrica[x][y].getMouseListeners()[0]);
+				} catch (Exception e) {}
+				
+				ms.matrica[x][y].setBackground(java.awt.Color.white);
+				String t = Integer.toString(tabla.polja[x][y].getbrMinaOkolo());
+
+				
 					if (tabla.polja[x][y].getbrMinaOkolo()==1){
-						String t = Integer.toString(tabla.polja[x][y].getbrMinaOkolo());
 						ms.matrica[x][y].setText(t);
-						ms.matrica[x][y].setBackground(java.awt.Color.BLUE);		
+						ms.matrica[x][y].setForeground(java.awt.Color.BLUE);
 					}
 					if (tabla.polja[x][y].getbrMinaOkolo()==2){
-						String t = Integer.toString(tabla.polja[x][y].getbrMinaOkolo());
 						ms.matrica[x][y].setText(t);
-						ms.matrica[x][y].setBackground(java.awt.Color.GREEN);					
+						ms.matrica[x][y].setForeground(java.awt.Color.GREEN);		
 					}
 					if (tabla.polja[x][y].getbrMinaOkolo()==3){
-						String t = Integer.toString(tabla.polja[x][y].getbrMinaOkolo());
 						ms.matrica[x][y].setText(t);
-						ms.matrica[x][y].setBackground(java.awt.Color.RED);					
+						ms.matrica[x][y].setForeground(java.awt.Color.RED);		
 					}
 					if (tabla.polja[x][y].getbrMinaOkolo()==4){
-						String t = Integer.toString(tabla.polja[x][y].getbrMinaOkolo());
 						ms.matrica[x][y].setText(t);
-						ms.matrica[x][y].setBackground(java.awt.Color.MAGENTA);					
+						ms.matrica[x][y].setForeground(java.awt.Color.MAGENTA);					
 					}
 					if (tabla.polja[x][y].getbrMinaOkolo()==5){
-						String t = Integer.toString(tabla.polja[x][y].getbrMinaOkolo());
 						ms.matrica[x][y].setText(t);
-						ms.matrica[x][y].setBackground(java.awt.Color.ORANGE);					
+						ms.matrica[x][y].setForeground(java.awt.Color.ORANGE);					
 					}
 					if (tabla.polja[x][y].getbrMinaOkolo()==6){
-						String t = Integer.toString(tabla.polja[x][y].getbrMinaOkolo());
 						ms.matrica[x][y].setText(t);
-						ms.matrica[x][y].setBackground(java.awt.Color.BLACK);					
+						ms.matrica[x][y].setForeground(java.awt.Color.BLACK);					
 					}
 					if (tabla.polja[x][y].getbrMinaOkolo()==7){
-						String t = Integer.toString(tabla.polja[x][y].getbrMinaOkolo());
 						ms.matrica[x][y].setText(t);
-						ms.matrica[x][y].setBackground(java.awt.Color.BLACK);					
+						ms.matrica[x][y].setForeground(java.awt.Color.BLACK);					
 					}
 					if (tabla.polja[x][y].getbrMinaOkolo()==8){
-						String t = Integer.toString(tabla.polja[x][y].getbrMinaOkolo());
 						ms.matrica[x][y].setText(t);
-						ms.matrica[x][y].setBackground(java.awt.Color.BLACK);					
+						ms.matrica[x][y].setForeground(java.awt.Color.BLACK);					
 					}
 				}
 				

@@ -158,6 +158,7 @@ public class DodajRezultatGUI extends JFrame {
 							textFieldIme.getText(), textFieldPrezime.getText());
 					String text = textAreaRangLista.getText();
 					textAreaRangLista.setText(text + "\n"+GUIKontroler.vlatiListuPrikaz());
+					btnDodaj.setEnabled(false);
 				}
 			});
 		}

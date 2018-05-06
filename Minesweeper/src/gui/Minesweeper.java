@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.AbstractButton;
@@ -37,6 +38,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
+import javax.swing.UIManager;
 import javax.swing.ImageIcon;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -70,7 +72,7 @@ public class Minesweeper extends JFrame {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Minesweeper.class.getResource("/icons/915944-200.png")));
 		setTitle("Minesweeper");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 336, 438);
 		GUIKontroler.pokreniTimer();
 		
@@ -219,8 +221,11 @@ public class Minesweeper extends JFrame {
 						if (GUIKontroler.getStatus() == 0) {
 							JButton dugme = (JButton) e.getSource(); // nalazi dugme koje je pozvalo event
 							dugme.setEnabled(false);
+							dugme.setEnabled(true);//da skine neki okvir oko dugmeta
+
 							int x = (dugme.getX() - 10) / 30;// kordinate dugmeta koje ce se slati logickom delu(Tabla)
 							int y = (dugme.getY() - 10) / 30;
+
 							GUIKontroler.pritisnutoPolje(x, y);
 						}
 					}

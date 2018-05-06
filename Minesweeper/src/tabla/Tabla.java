@@ -47,45 +47,10 @@ public class Tabla {
 		return SOPritisnutoPolje.izvrsi(x,y,this);
 	}
 	
-	public void postaviMine() {
-		SOPostavljanjeMina.izvrsi(dimX, dimY, brMina, polja);
+	public void postaviMine(int xp,int yp) {
+		SOPostavljanjeMina.izvrsi(dimX, dimY, brMina, polja,xp,yp);
 		SOOznacavanjePolja.izvrsi(dimX,dimY,polja);	
 	}
 	
-	
-	
-	//privremeno
-	public void prikaz() {
-		int x,y;
-		for(y=0;y<dimY;y++) {
-			System.out.println();
-	
-			for(x=0;x<dimX;x++) {
-				if(polja[x][y].isMina())
-					System.out.print("* ");
-				else
-					System.out.print(polja[x][y].getbrMinaOkolo()+" ");
-			}
-		}
-		System.out.println("\n");
-		for(y=0;y<dimY;y++) {
-			System.out.println();
-	
-			for(x=0;x<dimX;x++) {
-				if(polja[x][y].isOtvoreno())
-					System.out.print(". ");
-				else
-					System.out.print("X ");
-			}
-		}
-	}
-	//privremeno
-	public static void main(String[] args) {
-		Tabla t = new Tabla(10,10,10);
-		t.pritisnutoPolje(0, 0);
-		t.pritisnutoPolje(5, 7);
-		t.prikaz();
-		System.out.println(t.brOtvorenih);
-	}
 
 }
