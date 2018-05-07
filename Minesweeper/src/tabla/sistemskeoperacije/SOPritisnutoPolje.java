@@ -1,10 +1,23 @@
 package tabla.sistemskeoperacije;
 
-import tabla.Polje;
 import tabla.Tabla;
 
+/**
+ * Sistemska operacija koja azurira stanje tabla u zavisnosti od otvorenog polja i odredjuje stanje igre.
+ * @author Milos Brkic
+ * @version 1.0
+ */
 public class SOPritisnutoPolje {
 	
+	/**
+	 * Metoda koja izvrsava sistemsku operaciju.
+	 * @param x Koordinata X pritisnutog polja.
+	 * @param y Koordinata Y pritisnutog polja.
+	 * @param tabla Tabla nad kojom se vrse izmene.
+	 * @return 2 ako su sva polja osim mina otvorena,
+	 * 1 ako se na otvorenom polju nalazi mina,
+	 * 0 u ostalim slucajevima.
+	 */
 	public static int izvrsi(int x, int y, Tabla tabla) {
 		
 		if(tabla.polja[x][y].isMina())
@@ -23,6 +36,12 @@ public class SOPritisnutoPolje {
 		return 0;//igra se nastavlja
 	}
 
+	/**
+	 * Pomocna privatna metoda za rekurzivno otvaranje polja koja se granice i nemaju mine u okolini.
+	 * @param x Koordinata X polja koje se otvara.
+	 * @param y Koordinata X polja koje se otvara.
+	 * @param tabla Tabla nad kojom se vrse izmene.
+	 */
 	private static void lancanoOtvaranje(int x,int y,Tabla tabla) {
 		if(tabla.polja[x][y].isMina() || tabla.polja[x][y].isOtvoreno())
 			return;
