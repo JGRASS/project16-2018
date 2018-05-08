@@ -3,6 +3,7 @@ package tabla.sistemskeoperacije;
 import java.util.Random;
 
 import tabla.Polje;
+import tabla.Tabla;
 
 /**
  * Sistemska operacija koja na tabli postavlja mine na nasumicnin pozicijama osim na prvo otvoreno polje.
@@ -20,15 +21,15 @@ public class SOPostavljanjeMina {
 	 * @param xp Koordinata X prvog otvorenog polja.
 	 * @param yp Koordinata Y prvog otvorenog polja.
 	 */
-	public static void izvrsi(int dimX, int dimY, int brMina, Polje[][] polja,int xp, int yp) {
+	public static void izvrsi(Tabla t,int xp, int yp) {
 		Random rand = new Random();
 		int brPostMina=0;
 		int x,y;
-		while(brPostMina<brMina) {
-			x=rand.nextInt(dimX);
-			y=rand.nextInt(dimY);
-			if(polja[x][y].isMina()==false && (x!=xp || y!=yp)) {
-				polja[x][y].setMina(true);
+		while(brPostMina<t.brMina) {
+			x=rand.nextInt(t.getX());
+			y=rand.nextInt(t.getY());
+			if(t.polja[x][y].isMina()==false && (x!=xp || y!=yp)) {
+				t.polja[x][y].setMina(true);
 				brPostMina++;
 			}
 		}	

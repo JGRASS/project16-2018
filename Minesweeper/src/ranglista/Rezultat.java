@@ -3,6 +3,8 @@ package ranglista;
 import java.io.Serializable;
 
 public class Rezultat implements Serializable {
+
+	private static final long serialVersionUID = 6756762953346763169L;
 	private int vreme;
 	private String tipIgre;
 	private String ime;
@@ -23,17 +25,17 @@ public class Rezultat implements Serializable {
 	public String getIme() {
 		return ime;
 	}
-	public void setIme(String ime) {
-		if (ime==null && ime.isEmpty())
-			throw new RuntimeException("String ime ne sme biti prazan string ili null");
+	public void setIme(String ime) throws Exception{
+		if (ime==null || ime.isEmpty())
+			throw new Exception("String ime ne sme biti prazan string ili null");
 		this.ime = ime;
 	}
 	public String getPrezime() {
 		return prezime;
 	}
-	public void setPrezime(String prezime) {
-		if (prezime==null && prezime.isEmpty())
-			throw new RuntimeException("String prezime ne sme biti prazan string ili null");
+	public void setPrezime(String prezime) throws Exception{
+		if (prezime==null || prezime.isEmpty())
+			throw new Exception("String prezime ne sme biti prazan string ili null");
 		this.prezime = prezime;
 	}
 	@Override

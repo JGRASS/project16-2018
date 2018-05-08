@@ -32,7 +32,8 @@ public class SODodajRezultat {
 						rangLista[k]=rangLista[k-1];
 					rangLista[i]=rezultat;
 					rangLista[brRezultata]=pom;
-					brRezultata++;	
+					brRezultata++;
+					return;
 				}
 			
 			}

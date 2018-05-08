@@ -1,23 +1,26 @@
 package ranglista;
 
+import java.io.Serializable;
+
 import sistemskeoperacije2.SODodajRezultat;
 import sistemskeoperacije2.SOPrikazListe;
-import sistemskeoperacije2.SOSacuvajUFajl;
-import sistemskeoperacije2.SOUcitajIzFajla;
 
-public class RangLista implements RangListaInterface {
 
+public class RangLista implements Serializable {
+
+
+	private static final long serialVersionUID = 345435L;
 	private Rezultat[] rangLista= new Rezultat[100];
 	private int brRezultata=0;
 	
-	@Override
+
 	public void dodajRezultatSortirano(Rezultat rezultat) {
 		SODodajRezultat.izvrsi(rezultat, rangLista, brRezultata);
 		if (brRezultata!=100)
 			brRezultata++;
 	}
 
-	@Override
+	
 	public Rezultat[] vratiRangListu() {
 		return rangLista;
 	}
@@ -26,16 +29,5 @@ public class RangLista implements RangListaInterface {
 		return SOPrikazListe.izvrsi(rangLista, brRezultata);
 	}
 
-	@Override
-	public void ucitajIzFajla(String putanja) {
-		SOUcitajIzFajla.izvrsi(putanja);
-		
-	}
-
-	@Override
-	public void sacuvajUFajl(String putanja) {
-		SOSacuvajUFajl.izvrsi(putanja, rangLista);
-		
-	}
 
 }

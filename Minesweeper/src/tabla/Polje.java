@@ -16,17 +16,6 @@ public class Polje {
 	/** Broj mina koji se nalazi oko ovog polja sa kojima se polje granici. */
 	private int brMinaOkolo = 0;
 	
-	/** Da li je polje oznaceno zastavicom. */
-	public boolean nemaZastavu = true;
-	
-	
-	public boolean isNemaZastavu() {//nisam siguran jel se ovo koristi negde
-		return nemaZastavu;
-	}
-
-	public void setNemaZastavu(boolean nemaZastavu) {
-		this.nemaZastavu = nemaZastavu;
-	}
 
 	/**
 	 * Vraca stanje da li je polje otvoreno.

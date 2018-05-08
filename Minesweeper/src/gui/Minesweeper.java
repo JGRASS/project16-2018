@@ -44,6 +44,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
+import java.awt.Rectangle;
 
 public class Minesweeper extends JFrame {
 
@@ -108,6 +109,7 @@ public class Minesweeper extends JFrame {
 		rdbtnmntmBeginner.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GUIKontroler.novaIgra();
+				textPreostaliBrojMina.setText(""+GUIKontroler.getBrojPreostalihMina());
 			}
 		});
 		buttonGroup.add(rdbtnmntmBeginner);
@@ -117,6 +119,7 @@ public class Minesweeper extends JFrame {
 		rdbtnmntmIntermediate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GUIKontroler.novaIgra();
+				textPreostaliBrojMina.setText(""+GUIKontroler.getBrojPreostalihMina());
 			}
 		});
 		buttonGroup.add(rdbtnmntmIntermediate);
@@ -126,6 +129,7 @@ public class Minesweeper extends JFrame {
 		rdbtnmntmExpert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GUIKontroler.novaIgra();
+				textPreostaliBrojMina.setText(""+GUIKontroler.getBrojPreostalihMina());
 			}
 		});
 		buttonGroup.add(rdbtnmntmExpert);
@@ -177,7 +181,7 @@ public class Minesweeper extends JFrame {
 		textPreostaliBrojMina.setEditable(false);
 		textPreostaliBrojMina.setHorizontalAlignment(SwingConstants.LEFT);
 		panelZaglavlje.add(textPreostaliBrojMina);
-		textPreostaliBrojMina.setColumns(10);
+		textPreostaliBrojMina.setColumns(3);
 		
 		btnNovaIgra = new JButton("");
 		btnNovaIgra.addActionListener(new ActionListener() {
@@ -189,7 +193,7 @@ public class Minesweeper extends JFrame {
 		btnNovaIgra.setIcon(new ImageIcon(Minesweeper.class.getResource("/icons/Smile.png")));
 		panelZaglavlje.add(btnNovaIgra);
 		
-		lblTimer = new JLabel("");
+		lblTimer = new JLabel("0");
 		panelZaglavlje.add(lblTimer);
 			
 		postavljanjePolja(dimX, dimY);
@@ -203,7 +207,7 @@ public class Minesweeper extends JFrame {
 		panelMatrica.setBounds(5, 49, 10+dimX*30, 10+dimY*30);
 		contentPane.add(panelMatrica);
 		panelMatrica.setLayout(null);		
-		panelZaglavlje.setBounds(5, 5, 10+30*dimX, 41);
+		panelZaglavlje.setBounds(5, 5, 30*dimX-10, 41);
 		setSize(36+dimX*30, 125+dimY*30);
 		matrica = new JButton[dimX][dimY];
 		textPreostaliBrojMina.setText(""+GUIKontroler.getBrojPreostalihMina());
@@ -226,7 +230,10 @@ public class Minesweeper extends JFrame {
 							int x = (dugme.getX() - 10) / 30;// kordinate dugmeta koje ce se slati logickom delu(Tabla)
 							int y = (dugme.getY() - 10) / 30;
 
-							GUIKontroler.pritisnutoPolje(x, y);
+							if(dugme.getIcon() == null) {
+								GUIKontroler.pritisnutoPolje(x, y);
+								textPreostaliBrojMina.setText(""+GUIKontroler.getBrojPreostalihMina());
+							}
 						}
 					}
 					}

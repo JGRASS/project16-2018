@@ -59,10 +59,16 @@ public class Tabla {
 	}
 	
 	/** Vraca broj mina na tabli. */
-	public int getBrMina(){
+	/*public int getBrMina(){
 		return brMina;
+	}*/
+	
+	
+	/*public void novaTabla(int dimX, int dimY, int brMina) {
+		
 	}
 	
+	/*
 	/**
 	 * Azurira stanje tabla u zavisnosti od otvorenog polja i odredjuje stanje igre.
 	 * @param x Koordinata X pritisnutog polja.
@@ -71,7 +77,7 @@ public class Tabla {
 	 * 1 ako se na otvorenom polju nalazi mina,
 	 * 0 u ostalim slucajevima.
 	 */
-	public int  pritisnutoPolje(int x, int y) {
+	/*public int  pritisnutoPolje(int x, int y) {
 		return SOPritisnutoPolje.izvrsi(x,y,this);
 	}
 	
@@ -80,10 +86,10 @@ public class Tabla {
 	 * @param xp Koordinata X prvog protisnutog polja.
 	 * @param yp Koordinata Y prvog protisnutog polja.
 	 */
-	public void postaviMine(int xp,int yp) {
+	/*public void postaviMine(int xp,int yp) {
 		SOPostavljanjeMina.izvrsi(dimX, dimY, brMina, polja,xp,yp);
 		SOOznacavanjePolja.izvrsi(dimX,dimY,polja);	
-	}
+	}*/
 	
 
 }

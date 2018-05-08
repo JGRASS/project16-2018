@@ -36,7 +36,7 @@ public class DodajRezultatGUI extends JFrame {
 	private JTextField textFieldPrezime;
 	private JScrollPane scrollPane;
 	public JTextArea textAreaRangLista;
-	private JButton btnDodaj;
+	public JButton btnDodaj;
 	private JPanel panel;
 	private JButton btnUcitajIzFajla;
 	private JButton btnSacuvajUFajl;
@@ -66,6 +66,8 @@ public class DodajRezultatGUI extends JFrame {
 		textFieldVreme.setText(vreme);
 		textFieldTipIgre.setText(tipIgre);
 		contentPane.add(getPanel());
+		
+		
 		
 	}
 	
@@ -144,7 +146,8 @@ public class DodajRezultatGUI extends JFrame {
 	private JTextArea getTextAreaRangLista() {
 		if (textAreaRangLista == null) {
 			textAreaRangLista = new JTextArea();
-			textAreaRangLista.setText("Mesto:  Vreme:   Tip igre:       Ime:          Prezime:");
+			textAreaRangLista.setEditable(false);
+			//textAreaRangLista.setText("Mesto:  Vreme:   Tip igre:       Ime:          Prezime:");
 			textAreaRangLista.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Rang lista", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		}
 		return textAreaRangLista;
@@ -154,11 +157,12 @@ public class DodajRezultatGUI extends JFrame {
 			btnDodaj = new JButton("Dodaj");
 			btnDodaj.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					GUIKontroler.unesiRezultat(Integer.parseInt(textFieldVreme.getText()), textFieldTipIgre.getText(), 
+					boolean uneto = GUIKontroler.unesiRezultat(Integer.parseInt(textFieldVreme.getText()), textFieldTipIgre.getText(), 
 							textFieldIme.getText(), textFieldPrezime.getText());
-					String text = textAreaRangLista.getText();
-					textAreaRangLista.setText(text + "\n"+GUIKontroler.vlatiListuPrikaz());
-					btnDodaj.setEnabled(false);
+
+					textAreaRangLista.setText(GUIKontroler.vlatiListuPrikaz());
+					if(uneto)
+						btnDodaj.setEnabled(false);
 				}
 			});
 		}
@@ -169,12 +173,12 @@ public class DodajRezultatGUI extends JFrame {
 			panel = new JPanel();
 			panel.setBounds(5, 146, 432, 33);
 			panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-			panel.add(getButton_1());
-			panel.add(getButton_2());
+			//panel.add(getButton_1());
+			//panel.add(getButton_2());
 		}
 		return panel;
 	}
-	private JButton getButton_1() {
+	/*private JButton getButton_1() {
 		if (btnUcitajIzFajla == null) {
 			btnUcitajIzFajla = new JButton("Ucitaj iz fajla");
 			btnUcitajIzFajla.addActionListener(new ActionListener() {
@@ -196,5 +200,5 @@ public class DodajRezultatGUI extends JFrame {
 			});
 		}
 		return btnSacuvajUFajl;
-	}
+	}*/
 }

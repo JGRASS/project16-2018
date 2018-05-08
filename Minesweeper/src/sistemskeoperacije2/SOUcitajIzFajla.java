@@ -4,17 +4,19 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
+import ranglista.RangLista;
 import ranglista.Rezultat;
 
 public class SOUcitajIzFajla {
-	public static Rezultat[] izvrsi(String putanja) {
+	public static RangLista izvrsi(String putanja) {
 		try{
 			ObjectInputStream in = new ObjectInputStream(
 					new BufferedInputStream(new FileInputStream(putanja)));
 			
-			return (Rezultat[])(in.readObject());
+			return (RangLista)(in.readObject());
 		}catch(Exception e){
-			throw new RuntimeException(e);
+			return new RangLista();
+			//throw new RuntimeException(e);
 		}
 	}
 }
