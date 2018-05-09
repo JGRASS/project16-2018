@@ -4,35 +4,51 @@ package gui.kontroler;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-
 import gui.DodajRezultatGUI;
 import gui.Minesweeper;
-import ranglista.RangLista;
-import ranglista.RangListaInterface;
 import ranglista.Rezultat;
 import tabla.SistemskiKontroler;
-import tabla.Tabla;
 
+
+/**
+ * Klasa iz koje se pokrece aplikacija, upravlja GUI prozorima i komunicira sa sistemskim kontrolerom.
+ * @author Milos Brkic
+ * @author Vanja Vlahovic
+ * @version 1.0
+ */
 public class GUIKontroler {
 	
-	//public static RangListaInterface rangLista = new RangLista();
+
+	/** Prozor za prikaz i dodavanje rezultata u rang listu. */
 	public static DodajRezultatGUI dp;
-	//public static Tabla tabla;
+	
+	/** Sistemski kontroler za poziv sistemskih operacija. */
 	public static SistemskiKontroler sk;
+	
+	/** Glavni prozor aplikacije sa GUI tablom. */
 	public static Minesweeper ms;
+	
+	/** Da li je na radu da se odigrna prvi potez (orvaranje prvog polja). */
 	private static boolean prviPotez;
+	
+	/** Status igre, da li je pobeda, poraz ili se nastavlja. */
 	private static int status;
+	
+	/** Broj preostalih mina u odnosu na postavljene zastavice. */
 	private static int brojPreostalih=10;
+	
+	/** Broj sekundi na tajmeru. */
 	private static int k=0;
+	
+	/** Timer koji odbrojava vreme igranja. */
 	private static Timer t;
 	
+	/** Main klasa iz koje se pokrece aplikacije. */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -50,6 +66,9 @@ public class GUIKontroler {
 		});
 	}
 	
+	/**
+	 * Tajmer koji odbrojava vreme trajanje igre u sekundama i ispisuje ga na prozoru Minesweeper.
+	 */
 	public static void pokreniTimer() {
 		t = new Timer(1000, new ActionListener() {
 			@Override
@@ -61,19 +80,22 @@ public class GUIKontroler {
 		t.start();
 	}
 	
+	/**
+	 * Na pocetku nove igre se restartuje vreme i tajmer se ponovo pokrece.
+	 */
 	public static void restartovanjeTimera() {
 		k=0;
 		t.stop();
 		t.start();		
 	}
 	
-	
+	// mislim da ovo ne mora u GUIKontroleru
 	public static void prikaziAboutProzor(){
 		JOptionPane.showMessageDialog(ms,
 				"Pronadjite mine u minskom polju, a da ne stanete ni na jednu od njih!", "Minesweeper",
 				JOptionPane.INFORMATION_MESSAGE);
 	}
-	
+
 	public static void prikaziExitProzor() {
 		int opcija = JOptionPane.showConfirmDialog(ms,
 				"Da li ZAISTA zelite da izadjete iz apliacije", "Izlazak",
@@ -83,6 +105,7 @@ public class GUIKontroler {
 			System.exit(0);
 	}
 	
+
 	public static void prikaziInstrukcijeProzor(){
 		 JOptionPane.showMessageDialog(ms, "Kliknite na polje da biste otkrili minu. Brojevi pokazuju koliko ima mina oko tog polja.",
 				"Minesweeper", JOptionPane.INFORMATION_MESSAGE);
@@ -94,6 +117,10 @@ public class GUIKontroler {
 				"Minesweeper", JOptionPane.INFORMATION_MESSAGE);		
 	}
 	
+	/**
+	 * Nakon pobede pojavljuje se dijalog koje vas pita da li zelite da unesete rezultat igre. 
+	 * Ako se pritisne YES otvara se DodajRezultatGUI prozor.
+	 */
 	public static void prikaziPobedaProzor(){
 		int opcija = JOptionPane.showConfirmDialog(ms, "Cestitamo! Pobedili ste. Da li zelite da unesete rezultat?",
 				"Minesweeper", JOptionPane.YES_NO_OPTION);
@@ -102,6 +129,10 @@ public class GUIKontroler {
 			
 		
 	}
+	
+	/**
+	 * Pokrece se nova igra u zavisnosti od izabranog tipa igre.
+	 */
 	public static void novaIgra() {
 		status=0;
 		prviPotez=true;
@@ -130,7 +161,14 @@ public class GUIKontroler {
 		restartovanjeTimera();
 	}
 	
-	
+	/**
+	 * Nakon svakog otvorenog polja se azurira tabla na logickom novou nakon cega se proverava stanje igre.
+	 * Ako je stanje 1 znaci da je otvorena mina i prikazuje se poruka da je igrac izgubuo.
+	 * Ako je stanje 2 znaci da se sve mine pronadjene i prikazuje se poruka da je igrac pobedio.
+	 * Ako je stanje 0 igra se nastavlja i azurira se Minesweeper prozor.
+	 * @param xp Koordinata X otvorenog polja.
+	 * @param yp Koordinata Y otvorenog polja.
+	 */
 	public static void pritisnutoPolje(int xp, int yp) {
 		if(prviPotez) {
 			sk.postaviMine(xp,yp);
@@ -139,7 +177,6 @@ public class GUIKontroler {
 		
 		if(status==0) {
 			status = sk.pritisnutoPolje(xp, yp);
-			
 		}
 
 		if(status==1) {//poraz
@@ -151,12 +188,8 @@ public class GUIKontroler {
 			ms.btnNovaIgra.setIcon(new ImageIcon(Minesweeper.class.getResource("/icons/s-l300.jpg")));
 			t.stop();
 			prikaziPobedaProzor();
-			
-			//trebalo bi i da se doda rezultat u rang listu
-			
 		}
 		azurirajGUI();
-
 	}
 		
 	

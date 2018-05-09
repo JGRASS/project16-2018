@@ -13,6 +13,6 @@ public class SOPrikazListe {
 			}
 			return tekst;
 		}
-		return "";
+		return "Mesto:  Vreme:   Tip igre:       Ime:          Prezime:\n";
 	}
 }

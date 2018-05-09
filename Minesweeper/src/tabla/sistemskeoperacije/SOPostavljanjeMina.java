@@ -2,7 +2,6 @@ package tabla.sistemskeoperacije;
 
 import java.util.Random;
 
-import tabla.Polje;
 import tabla.Tabla;
 
 /**

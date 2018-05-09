@@ -65,7 +65,7 @@ public class Polje {
 	 * @throws java.lang.RuntimeException ako broj mina nije u dozvoljenim granicima (od 0 do 8).
 	 */
 	public void setbrMinaOkolo(int brMina) throws RuntimeException {
-		if(brMina>= 0 || brMina<=8)
+		if(brMina>= 0 && brMina<=8)
 			this.brMinaOkolo = brMina;
 		else throw new RuntimeException("Broj mora biti od 0 do 8");
 	}

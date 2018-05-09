@@ -7,28 +7,57 @@ import tabla.sistemskeoperacije.SOOznacavanjePolja;
 import tabla.sistemskeoperacije.SOPostavljanjeMina;
 import tabla.sistemskeoperacije.SOPritisnutoPolje;
 
+/**
+ * Sistemski kontroler iz kog se pozivaju sistemske operacije logickog nivoa aplikacije.
+ * @author Milos Brkic
+ * @version 1.0
+ */
 public class SistemskiKontroler {
 	
+	/** Logicka tabla. */
 	private Tabla tabla;
+	
+	/** Rang lista igraca. */
 	private RangLista lista;
 
+	/**
+	 * Konstruktor koji kreira pocetnu tablu i ucitava rang listu iz fajla ukoliko postoji.
+	 */
 	public SistemskiKontroler() {
 		tabla = new Tabla(10,10,10);
 		lista = SOUcitajIzFajla.izvrsi("data/lista");
 	}
 
+	/**
+	 * Vraca rang listu.
+	 * @return lista kao RangLista.
+	 */
 	public RangLista getRangLista() {
 		return lista;
 	}
 
+	/**
+	 * Postavlja rang listu preko unetog parametra.
+	 * @param lista Rang lista koja se unosi.
+	 */
 	public void setRangLista(RangLista lista) {
 		this.lista = lista;
 	}
 
+	/**
+	 * Vraca tabli.
+	 * @return tabla kao Tabla.
+	 */
 	public Tabla getTabla() {
 		return tabla;
 	}
 
+	/**
+	 * Kreira novi tabli sa unetim parametrima.
+	 * @param dimX Dimenzija table X.
+	 * @param dimY Dimenzija table Y.
+	 * @param brMina Broj mina koji se postavlja na tablu.
+	 */
 	public void novaTabla(int dimX, int dimY, int brMina) {
 		this.tabla = new Tabla(dimX,dimY,brMina);
 	}
@@ -57,7 +86,10 @@ public class SistemskiKontroler {
 		SOOznacavanjePolja.izvrsi(tabla.getX(),tabla.getY(),tabla.polja);
 	}
 	
-	
+	/**
+	 * Cuva rang litu u fajl na zadatoj putanji.
+	 * @param putanja Putanja gde se fajl cuva.
+	 */
 	public void sacuvajUFajl(String putanja) {
 		SOSacuvajUFajl.izvrsi(putanja, lista);
 	}

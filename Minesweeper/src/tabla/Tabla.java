@@ -1,13 +1,9 @@
 package tabla;
 
-import tabla.sistemskeoperacije.SOOznacavanjePolja;
-import tabla.sistemskeoperacije.SOPostavljanjeMina;
-import tabla.sistemskeoperacije.SOPritisnutoPolje;
-
 /**
- * Glavna klasa logickog nivoa koja sadrzi logicku tablu i pomocne atribute, poziva sistemske operacije za tablu.
- * @author brkic
- * @version 0.2
+ * Logicka tabla na kojoj se postavljaju mine i oznacavaju polja.
+ * @author Milos Brkic
+ * @version 0.3
  */
 public class Tabla {
 	
@@ -29,7 +25,12 @@ public class Tabla {
 	/** Broj mina koji se nalaze na tabli. */
 	public int brMina;
 
-	//ovde ce mozda biti jos izmena
+	/**
+	 * Konstruktor za tablu.
+	 * @param dimX Dimenzija table X.
+	 * @param dimY Dimenzija table Y.
+	 * @param brMina Broj mina koji se nalazi na tabli.
+	 */
 	public Tabla(int dimX, int dimY, int brMina) {
 		this.dimX=dimX;
 		this.dimY=dimY;
@@ -57,39 +58,4 @@ public class Tabla {
 	public int getY() {
 		return dimY;
 	}
-	
-	/** Vraca broj mina na tabli. */
-	/*public int getBrMina(){
-		return brMina;
-	}*/
-	
-	
-	/*public void novaTabla(int dimX, int dimY, int brMina) {
-		
-	}
-	
-	/*
-	/**
-	 * Azurira stanje tabla u zavisnosti od otvorenog polja i odredjuje stanje igre.
-	 * @param x Koordinata X pritisnutog polja.
-	 * @param y Koordinata Y pritisnutog polja.
-	 * @return 2 ako su sva polja osim mina otvorena,
-	 * 1 ako se na otvorenom polju nalazi mina,
-	 * 0 u ostalim slucajevima.
-	 */
-	/*public int  pritisnutoPolje(int x, int y) {
-		return SOPritisnutoPolje.izvrsi(x,y,this);
-	}
-	
-	/**
-	 * Nakon prvog poteza postavljaju se mine i oznake.
-	 * @param xp Koordinata X prvog protisnutog polja.
-	 * @param yp Koordinata Y prvog protisnutog polja.
-	 */
-	/*public void postaviMine(int xp,int yp) {
-		SOPostavljanjeMina.izvrsi(dimX, dimY, brMina, polja,xp,yp);
-		SOOznacavanjePolja.izvrsi(dimX,dimY,polja);	
-	}*/
-	
-
 }
