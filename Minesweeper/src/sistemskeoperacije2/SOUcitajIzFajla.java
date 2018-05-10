@@ -7,16 +7,28 @@ import java.io.ObjectInputStream;
 import ranglista.RangLista;
 import ranglista.Rezultat;
 
+/**
+ * Sistemska operacija za uciravanje rang liste iz nekog fajla
+ * 
+ * @author Vanja Vlahovic
+ * @version 1.0
+ *
+ */
 public class SOUcitajIzFajla {
+	/**
+	 * Metoda koja izvrsava sistemsku operaciju
+	 * 
+	 * @param putanja
+	 *            apsolutna putanja do fajla
+	 * @return Rang lista sa rezultatima
+	 */
 	public static RangLista izvrsi(String putanja) {
-		try{
-			ObjectInputStream in = new ObjectInputStream(
-					new BufferedInputStream(new FileInputStream(putanja)));
-			
-			return (RangLista)(in.readObject());
-		}catch(Exception e){
+		try {
+			ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(putanja)));
+
+			return (RangLista) (in.readObject());
+		} catch (Exception e) {
 			return new RangLista();
-			//throw new RuntimeException(e);
 		}
 	}
 }

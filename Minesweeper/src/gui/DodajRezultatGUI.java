@@ -1,13 +1,9 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
-import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
@@ -23,31 +19,74 @@ import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import java.awt.FlowLayout;
 
+/**
+ * Prozor koji sluzi za unos novog rezultata
+ * 
+ * @author Vanja Vlahovic
+ * @version 1.0
+ */
 public class DodajRezultatGUI extends JFrame {
-
+	/**
+	 * panel na kome su grupisane sve GUI komponente
+	 */
 	private JPanel contentPane;
+	/**
+	 * Natpis vreme
+	 */
 	private JLabel lblVreme;
+	/**
+	 * tekstualno polje u kome se prikazuje vreme
+	 */
 	public JTextField textFieldVreme;
+	/**
+	 * Natpis tip igre
+	 */
 	private JLabel lblTipIgre;
+	/**
+	 * Tekstualno polje u kom je prikazan tip igre
+	 */
 	public JTextField textFieldTipIgre;
+	/**
+	 * Natpis ime
+	 */
 	private JLabel lblIme;
+	/**
+	 * Tekstualno polje u koje se upisuje ime igraca
+	 */
 	private JTextField textFieldIme;
+	/**
+	 * Natpis prezime
+	 */
 	private JLabel lblPrezime;
+	/**
+	 * Tekstualno polje u koje se upisuje prezime idraca
+	 */
 	private JTextField textFieldPrezime;
+	/**
+	 * Panel koji se skroluje
+	 */
 	private JScrollPane scrollPane;
+	/**
+	 * Tekstualno polje za viseredni ispis u kome se prikazuje rang lista
+	 */
 	public JTextArea textAreaRangLista;
+	/**
+	 * Dugme dodaj koje dodaje rezultat u rang listu
+	 */
 	public JButton btnDodaj;
+	/**
+	 * panel za unost komponenti
+	 */
 	private JPanel panel;
-	private JButton btnUcitajIzFajla;
-	private JButton btnSacuvajUFajl;
 
 	/**
-	 * Create the frame.
+	 * Kreiranje prozora
 	 */
 	public DodajRezultatGUI(String vreme, String tipIgre) {
 		setResizable(false);
 		setTitle("Upisivanje rezultata");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(DodajRezultatGUI.class.getResource("/icons/Throphy-512.png")));
+		setIconImage(
+				Toolkit.getDefaultToolkit().getImage(DodajRezultatGUI.class.getResource("/icons/Throphy-512.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 453, 461);
 		contentPane = new JPanel();
@@ -66,11 +105,14 @@ public class DodajRezultatGUI extends JFrame {
 		textFieldVreme.setText(vreme);
 		textFieldTipIgre.setText(tipIgre);
 		contentPane.add(getPanel());
-		
-		
-		
+
 	}
-	
+
+	/**
+	 * Vraca labelu vreme
+	 * 
+	 * @return JLabel vreme
+	 */
 	private JLabel getLblVreme() {
 		if (lblVreme == null) {
 			lblVreme = new JLabel("Vreme");
@@ -78,16 +120,28 @@ public class DodajRezultatGUI extends JFrame {
 		}
 		return lblVreme;
 	}
+
+	/**
+	 * Vraca tekstualno polje u kome je upisano ostvareno vreme
+	 * 
+	 * @return JTextField vreme
+	 */
 	private JTextField getTextFieldVreme() {
 		if (textFieldVreme == null) {
 			textFieldVreme = new JTextField();
 			textFieldVreme.setEditable(false);
 			textFieldVreme.setBounds(162, 5, 147, 25);
 			textFieldVreme.setColumns(10);
-			
+
 		}
 		return textFieldVreme;
 	}
+
+	/**
+	 * Vraca labelu tip igre
+	 * 
+	 * @return JLabel tip igre
+	 */
 	private JLabel getLblTipIgre() {
 		if (lblTipIgre == null) {
 			lblTipIgre = new JLabel("Tip igre");
@@ -95,6 +149,12 @@ public class DodajRezultatGUI extends JFrame {
 		}
 		return lblTipIgre;
 	}
+
+	/**
+	 * Vraca tekstualno polje u kome je upisan tip igre
+	 * 
+	 * @return JTExtField tip igre
+	 */
 	private JTextField getTextFieldTipIgre() {
 		if (textFieldTipIgre == null) {
 			textFieldTipIgre = new JTextField();
@@ -104,6 +164,12 @@ public class DodajRezultatGUI extends JFrame {
 		}
 		return textFieldTipIgre;
 	}
+
+	/**
+	 * Vraca labelu ime
+	 * 
+	 * @return JLabel ime
+	 */
 	private JLabel getLblIme() {
 		if (lblIme == null) {
 			lblIme = new JLabel("Ime");
@@ -111,6 +177,12 @@ public class DodajRezultatGUI extends JFrame {
 		}
 		return lblIme;
 	}
+
+	/**
+	 * Vraca tekstualno polje u kome je upisano ime igraca
+	 * 
+	 * @return JTextFiela ime
+	 */
 	private JTextField getTextFieldIme() {
 		if (textFieldIme == null) {
 			textFieldIme = new JTextField();
@@ -119,6 +191,12 @@ public class DodajRezultatGUI extends JFrame {
 		}
 		return textFieldIme;
 	}
+
+	/**
+	 * Vraca labelu prezime
+	 * 
+	 * @return JLabel prezime
+	 */
 	private JLabel getLblPrezime() {
 		if (lblPrezime == null) {
 			lblPrezime = new JLabel("Prezime");
@@ -126,6 +204,12 @@ public class DodajRezultatGUI extends JFrame {
 		}
 		return lblPrezime;
 	}
+
+	/**
+	 * Vraca tekstualno polje u kome je upisano prezime igraca
+	 * 
+	 * @return JTextField prezime
+	 */
 	private JTextField getTextFieldPrezime() {
 		if (textFieldPrezime == null) {
 			textFieldPrezime = new JTextField();
@@ -134,6 +218,12 @@ public class DodajRezultatGUI extends JFrame {
 		}
 		return textFieldPrezime;
 	}
+
+	/**
+	 * Vraca panel koji se skroluje
+	 * 
+	 * @return JScrollPane
+	 */
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
@@ -143,62 +233,55 @@ public class DodajRezultatGUI extends JFrame {
 		}
 		return scrollPane;
 	}
+
+	/**
+	 * Vraca tekstualno polje za viseredni ispis u kome je rangl lista
+	 * 
+	 * @return JTextArea rang lista
+	 */
 	private JTextArea getTextAreaRangLista() {
 		if (textAreaRangLista == null) {
 			textAreaRangLista = new JTextArea();
 			textAreaRangLista.setEditable(false);
-			//textAreaRangLista.setText("Mesto:  Vreme:   Tip igre:       Ime:          Prezime:");
-			textAreaRangLista.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Rang lista", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+			textAreaRangLista.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null),
+					"Rang lista", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		}
 		return textAreaRangLista;
 	}
+
+	/**
+	 * Vraca dugme koje unosi novi rezultat u rang listu
+	 * 
+	 * @return JButton dodaj
+	 */
 	private JButton getBtnDodaj() {
 		if (btnDodaj == null) {
 			btnDodaj = new JButton("Dodaj");
 			btnDodaj.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					boolean uneto = GUIKontroler.unesiRezultat(Integer.parseInt(textFieldVreme.getText()), textFieldTipIgre.getText(), 
-							textFieldIme.getText(), textFieldPrezime.getText());
+					boolean uneto = GUIKontroler.unesiRezultat(Integer.parseInt(textFieldVreme.getText()),
+							textFieldTipIgre.getText(), textFieldIme.getText(), textFieldPrezime.getText());
 
 					textAreaRangLista.setText(GUIKontroler.vlatiListuPrikaz());
-					if(uneto)
+					if (uneto)
 						btnDodaj.setEnabled(false);
 				}
 			});
 		}
 		return btnDodaj;
 	}
+
+	/**
+	 * Vraca panel na kome se nalazi dugme
+	 * 
+	 * @return JPanel panel
+	 */
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
 			panel.setBounds(5, 146, 432, 33);
 			panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-			//panel.add(getButton_1());
-			//panel.add(getButton_2());
 		}
 		return panel;
 	}
-	/*private JButton getButton_1() {
-		if (btnUcitajIzFajla == null) {
-			btnUcitajIzFajla = new JButton("Ucitaj iz fajla");
-			btnUcitajIzFajla.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					GUIKontroler.ucitajIzFajla();
-					textAreaRangLista.setText(GUIKontroler.vlatiListuPrikaz());
-				}
-			});
-		}
-		return btnUcitajIzFajla;
-	}
-	private JButton getButton_2() {
-		if (btnSacuvajUFajl == null) {
-			btnSacuvajUFajl = new JButton("Sacuvaj u fajl");
-			btnSacuvajUFajl.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					GUIKontroler.sacuvajUFajl();
-				}
-			});
-		}
-		return btnSacuvajUFajl;
-	}*/
 }

@@ -11,9 +11,9 @@ import ranglista.RangLista;
 public class SistemskiKontrolerTest {
 
 	private SistemskiKontroler sk;
-	
+
 	@Before
-	public void setUp() throws Exception {	
+	public void setUp() throws Exception {
 		sk = new SistemskiKontroler();
 	}
 
@@ -29,7 +29,6 @@ public class SistemskiKontrolerTest {
 		assertEquals(lista, sk.getRangLista());
 	}
 
-
 	@Test
 	public void testNovaTabla() {
 		sk.novaTabla(5, 4, 10);
@@ -37,6 +36,6 @@ public class SistemskiKontrolerTest {
 		assertEquals(4, sk.getTabla().getY());
 		assertEquals(10, sk.getTabla().brMina);
 	}
-	
-	//ostale metode pozivaju sistemske operacije koje su posebno testirane
+
+	// ostale metode pozivaju sistemske operacije koje su posebno testirane
 }

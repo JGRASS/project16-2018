@@ -11,7 +11,7 @@ import org.junit.Test;
 public class PoljeTest {
 
 	private Polje p;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		p = new Polje();
@@ -27,7 +27,7 @@ public class PoljeTest {
 		p.setOtvoreno(true);
 		assertTrue(p.isOtvoreno());
 	}
-	
+
 	@Test
 	public void testSetOtvorenoFalse() {
 		p.setOtvoreno(false);
@@ -39,21 +39,20 @@ public class PoljeTest {
 		p.setMina(true);
 		assertTrue(p.isMina());
 	}
-	
+
 	@Test
 	public void testSetMinaFalse() {
 		p.setMina(false);
 		assertFalse(p.isMina());
 	}
 
-
 	@Test
 	public void testSetbrMinaOkoloNormal() {
 		p.setbrMinaOkolo(5);
-		assertEquals(5,p.getbrMinaOkolo());
+		assertEquals(5, p.getbrMinaOkolo());
 	}
-	
-	@Test (expected = java.lang.RuntimeException.class)
+
+	@Test(expected = java.lang.RuntimeException.class)
 	public void testSetbrMinaOkoloWrong() {
 		p.setbrMinaOkolo(10);
 	}
