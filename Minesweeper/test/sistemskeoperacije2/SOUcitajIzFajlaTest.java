@@ -2,7 +2,6 @@ package sistemskeoperacije2;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,7 +35,7 @@ public class SOUcitajIzFajlaTest {
 		sk.dodajRezultatSortirano(r);
 		sk.dodajRezultatSortirano(r2);
 		SOSacuvajUFajl.izvrsi("data/nekiFajl.txt", rl);
-		assertEquals(SOUcitajIzFajla.izvrsi("data/nekiFajl.txt").vratiRangListu(), rl.vratiRangListu());
+		assertArrayEquals(SOUcitajIzFajla.izvrsi("data/nekiFajl.txt").vratiRangListu(), rl.vratiRangListu());
 	}
 
 }
