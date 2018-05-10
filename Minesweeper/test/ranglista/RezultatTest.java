@@ -6,8 +6,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import tabla.Polje;
-
 public class RezultatTest {
 
 	private Rezultat r;

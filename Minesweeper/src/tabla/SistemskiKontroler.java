@@ -1,6 +1,9 @@
 package tabla;
 
 import ranglista.RangLista;
+import ranglista.Rezultat;
+import sistemskeoperacije2.SODodajRezultat;
+import sistemskeoperacije2.SOPrikazListe;
 import sistemskeoperacije2.SOSacuvajUFajl;
 import sistemskeoperacije2.SOUcitajIzFajla;
 import tabla.sistemskeoperacije.SOOznacavanjePolja;
@@ -109,6 +112,27 @@ public class SistemskiKontroler {
 	 */
 	public void sacuvajUFajl(String putanja) {
 		SOSacuvajUFajl.izvrsi(putanja, lista);
+	}
+	
+	
+	/**
+	 * Metoda koja ubacuje rezultate sortirano u listu
+	 * 
+	 * @param rezultat
+	 *            rezultat koji se unosi u listu
+	 */
+	public void dodajRezultatSortirano(Rezultat rezultat) {
+		SODodajRezultat.izvrsi(rezultat, lista);
+	}
+	
+	
+	/**
+	 * Metoda koja vraca listu rezultata
+	 * 
+	 * @return lista rezultata kao String vrednost
+	 */
+	public String prikaziListu() {
+		return SOPrikazListe.izvrsi(lista.vratiRangListu(), lista.brRezultata);
 	}
 
 }

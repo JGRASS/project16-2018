@@ -94,7 +94,7 @@ public class GUIKontroler {
 	}
 
 	/**
-	 * U slucaju poraza otvara se prozor koji obavestava korisnika da je izgubio
+	 * U slucaju poraza otvara se prozor koji obavestava korisnika da je izgubio.
 	 */
 	public static void prikaziKrajProzor() {
 		JOptionPane.showMessageDialog(ms, "Zao nam je. Izgubili ste.", "Minesweeper", JOptionPane.INFORMATION_MESSAGE);
@@ -196,17 +196,8 @@ public class GUIKontroler {
 					{
 
 						try {
-							ms.matrica[x][y].removeActionListener(ms.matrica[x][y].getActionListeners()[0]);// ovo
-																											// se
-																											// koristi
-																											// umesto
-																											// disable
-																											// zato
-							ms.matrica[x][y].removeMouseListener(ms.matrica[x][y].getMouseListeners()[0]);// sto
-																											// disable
-																											// skida
-																											// boju
-																											// slova
+							ms.matrica[x][y].removeActionListener(ms.matrica[x][y].getActionListeners()[0]);
+							ms.matrica[x][y].removeMouseListener(ms.matrica[x][y].getMouseListeners()[0]);
 							ms.matrica[x][y].removeMouseListener(ms.matrica[x][y].getMouseListeners()[0]);
 						} catch (Exception e) {
 						}
@@ -308,7 +299,7 @@ public class GUIKontroler {
 			tip = "Expert";
 		DodajRezultatGUI prozor = new DodajRezultatGUI(ms.lblTimer.getText(), tip);
 		prozor.setLocationRelativeTo(ms);
-		prozor.textAreaRangLista.setText(sk.getRangLista().prikaziListu());
+		prozor.textAreaRangLista.setText(sk.prikaziListu());
 		prozor.setVisible(true);
 	}
 
@@ -316,11 +307,10 @@ public class GUIKontroler {
 	 * Metoda koja opisuje prozor koji se otvara kada korisnik samo zeli da vidi
 	 * rang listu
 	 */
-
 	public static void prikaziRezultatiGUI() {
 		RezultatiGUI prozor = new RezultatiGUI();
 		prozor.setLocationRelativeTo(ms);
-		prozor.textArea.setText(sk.getRangLista().prikaziListu());
+		prozor.textArea.setText(sk.prikaziListu());
 		prozor.setVisible(true);
 	}
 
@@ -339,7 +329,6 @@ public class GUIKontroler {
 	 * @return true ako je reyultat uspesno unet false ako se pojavi greska
 	 *         prilikom unosa
 	 */
-
 	public static boolean unesiRezultat(int vreme, String tip, String ime, String prezime) {
 		try {
 			Rezultat rezultat = new Rezultat();
@@ -347,7 +336,7 @@ public class GUIKontroler {
 			rezultat.setTipIgre(tip);
 			rezultat.setIme(ime);
 			rezultat.setPrezime(prezime);
-			sk.getRangLista().dodajRezultatSortirano(rezultat);
+			sk.dodajRezultatSortirano(rezultat);
 			sk.sacuvajUFajl("data/lista");
 			return true;
 
@@ -363,9 +352,8 @@ public class GUIKontroler {
 	 * 
 	 * @return lista kao String
 	 */
-
 	public static String vlatiListuPrikaz() {
-		return sk.getRangLista().prikaziListu();
+		return sk.prikaziListu();
 	}
 
 }

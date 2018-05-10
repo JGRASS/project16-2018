@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
 import ranglista.RangLista;
-import ranglista.Rezultat;
 
 /**
  * Sistemska operacija za uciravanje rang liste iz nekog fajla

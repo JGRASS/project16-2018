@@ -1,23 +1,17 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.EventQueue;
 
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
+
 
 import gui.kontroler.GUIKontroler;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.Component;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -30,21 +24,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JMenu;
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
-import java.awt.event.InputEvent;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.ButtonGroup;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.Timer;
-import javax.swing.UIManager;
 import javax.swing.ImageIcon;
 import java.awt.Dimension;
-import java.awt.GridLayout;
-import javax.swing.BoxLayout;
 import java.awt.FlowLayout;
-import java.awt.Rectangle;
+
 
 /**
  * Klasa koja predstavlja minesweeper aplikaciju
@@ -324,21 +312,12 @@ public class Minesweeper extends JFrame {
 																// svako polje:
 					{
 						if (GUIKontroler.getStatus() == 0) {
-							JButton dugme = (JButton) e.getSource(); // nalazi
-																		// dugme
-																		// koje
-																		// je
-																		// pozvalo
-																		// event
+							JButton dugme = (JButton) e.getSource(); 
 							dugme.setEnabled(false);
 							dugme.setEnabled(true);// da skine neki okvir oko
 													// dugmeta
 
-							int x = (dugme.getX() - 10) / 30;// kordinate
-																// dugmeta koje
-																// ce se slati
-																// logickom
-																// delu(Tabla)
+							int x = (dugme.getX() - 10) / 30;
 							int y = (dugme.getY() - 10) / 30;
 
 							if (dugme.getIcon() == null) {
@@ -352,23 +331,8 @@ public class Minesweeper extends JFrame {
 					public void mouseClicked(MouseEvent e) { // desni klik za
 																// svako polje
 						JButton dugme = (JButton) e.getSource();
-						if (e.getButton() == 3 && dugme.isEnabled() && GUIKontroler.getStatus() == 0) {// posto
-																										// ne
-																										// postoji
-																										// obican
-																										// event
-																										// za
-																										// desni
-																										// klik
-																										// ovde
-																										// se
-																										// proverava
-																										// da
-																										// li
-																										// je
-																										// klik
-																										// desni
-																										// (3)
+						if (e.getButton() == 3 && dugme.isEnabled() && GUIKontroler.getStatus() == 0) {
+							
 							if (dugme.getIcon() == null) {
 								dugme.setIcon(new ImageIcon(Minesweeper.class.getResource("/icons/images.png")));
 								GUIKontroler.SmanjiBrojPreostalihMina();

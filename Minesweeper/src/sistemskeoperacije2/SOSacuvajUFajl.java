@@ -5,7 +5,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
 import ranglista.RangLista;
-import ranglista.Rezultat;
+
 
 /**
  * Sistemska operacija koja cuva rang listu u nekom fajlu
