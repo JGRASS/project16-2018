@@ -30,8 +30,11 @@ import javax.swing.ButtonGroup;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
+
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 
 
 /**
@@ -70,7 +73,7 @@ public class Minesweeper extends JFrame {
 	 */
 	public JPanel panelZaglavlje;
 	/**
-	 * Dugme koje pokrece novu igru kao Begginer
+	 * Dugme koje pokrece novu igru kao Beginner
 	 */
 	public JRadioButtonMenuItem rdbtnmntmBeginner;
 	/**
@@ -100,7 +103,7 @@ public class Minesweeper extends JFrame {
 			 */
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int opcija = JOptionPane.showConfirmDialog(contentPane, "Da li ZAISTA zelite da izadjete iz apliacije",
+				int opcija = JOptionPane.showConfirmDialog(contentPane, "Da li ZAISTA zelite da izadjete iz apliacije?",
 						"Izlazak", JOptionPane.YES_NO_OPTION);
 
 				if (opcija == JOptionPane.YES_OPTION)
@@ -108,7 +111,7 @@ public class Minesweeper extends JFrame {
 			}
 		});
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Minesweeper.class.getResource("/icons/915944-200.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Minesweeper.class.getResource("/icons/mina.png")));
 		setTitle("Minesweeper");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 336, 438);
@@ -193,7 +196,7 @@ public class Minesweeper extends JFrame {
 			 * Otvaranje novog prozora u slucaju izlaza iz aplikacije
 			 */
 			public void actionPerformed(ActionEvent arg0) {
-				int opcija = JOptionPane.showConfirmDialog(contentPane, "Da li ZAISTA zelite da izadjete iz apliacije",
+				int opcija = JOptionPane.showConfirmDialog(contentPane, "Da li ZAISTA zelite da izadjete iz apliacije?",
 						"Izlazak", JOptionPane.YES_NO_OPTION);
 
 				if (opcija == JOptionPane.YES_OPTION)
@@ -251,15 +254,17 @@ public class Minesweeper extends JFrame {
 		contentPane.setLayout(null);
 
 		panelZaglavlje = new JPanel();
-		panelZaglavlje.setBounds(5, 5, 310, 41);
+		panelZaglavlje.setBounds(6, 5, 310, 41);
 		contentPane.add(panelZaglavlje);
 		panelZaglavlje.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		textPreostaliBrojMina = new JTextField();
 		textPreostaliBrojMina.setEditable(false);
-		textPreostaliBrojMina.setHorizontalAlignment(SwingConstants.LEFT);
+		textPreostaliBrojMina.setBorder(null);
+		textPreostaliBrojMina.setFont(new Font(null,0,15));
+		textPreostaliBrojMina.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelZaglavlje.add(textPreostaliBrojMina);
-		textPreostaliBrojMina.setColumns(3);
+		textPreostaliBrojMina.setColumns(2);
 
 		btnNovaIgra = new JButton("");
 		btnNovaIgra.addActionListener(new ActionListener() {
@@ -275,6 +280,11 @@ public class Minesweeper extends JFrame {
 		panelZaglavlje.add(btnNovaIgra);
 
 		lblTimer = new JLabel("0");
+		lblTimer.setPreferredSize(new Dimension(32, 14));
+		lblTimer.setHorizontalTextPosition(SwingConstants.LEFT);
+		lblTimer.setHorizontalAlignment(SwingConstants.LEFT);
+		lblTimer.setMinimumSize(new Dimension(16, 14));
+		lblTimer.setFont(new Font(null,0,15));
 		panelZaglavlje.add(lblTimer);
 
 		postavljanjePolja(dimX, dimY);
@@ -295,7 +305,7 @@ public class Minesweeper extends JFrame {
 		panelMatrica.setBounds(5, 49, 10 + dimX * 30, 10 + dimY * 30);
 		contentPane.add(panelMatrica);
 		panelMatrica.setLayout(null);
-		panelZaglavlje.setBounds(5, 5, 30 * dimX - 10, 41);
+		panelZaglavlje.setBounds(22, 5, 30 * dimX - 10, 41);
 		setSize(36 + dimX * 30, 125 + dimY * 30);
 		matrica = new JButton[dimX][dimY];
 		textPreostaliBrojMina.setText("" + GUIKontroler.getBrojPreostalihMina());
@@ -306,6 +316,7 @@ public class Minesweeper extends JFrame {
 				matrica[x][y].setLocation(10 + x * 30, 10 + y * 30);
 				matrica[x][y].setVisible(true);
 				matrica[x][y].setSize(30, 30);
+				matrica[x][y].setBackground(new Color(210,210,255));
 				matrica[x][y].setMargin(new Insets(2, 2, 2, 2));
 				matrica[x][y].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) // levi klik za
@@ -334,7 +345,7 @@ public class Minesweeper extends JFrame {
 						if (e.getButton() == 3 && dugme.isEnabled() && GUIKontroler.getStatus() == 0) {
 							
 							if (dugme.getIcon() == null) {
-								dugme.setIcon(new ImageIcon(Minesweeper.class.getResource("/icons/images.png")));
+								dugme.setIcon(new ImageIcon(Minesweeper.class.getResource("/icons/zastavica.png")));
 								GUIKontroler.SmanjiBrojPreostalihMina();
 								textPreostaliBrojMina.setText("" + GUIKontroler.getBrojPreostalihMina());
 							} else {

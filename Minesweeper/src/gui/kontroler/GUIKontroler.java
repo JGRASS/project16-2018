@@ -61,7 +61,7 @@ public class GUIKontroler {
 					sk = new SistemskiKontroler();
 					ms = new Minesweeper(10, 10);
 					ms.setVisible(true);
-
+					t.stop();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -77,8 +77,8 @@ public class GUIKontroler {
 		t = new Timer(1000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ms.lblTimer.setText(String.valueOf(k));
 				k++;
+				ms.lblTimer.setText(String.valueOf(k));
 			}
 		});
 		t.start();
@@ -90,7 +90,7 @@ public class GUIKontroler {
 	public static void restartovanjeTimera() {
 		k = 0;
 		t.stop();
-		t.start();
+		ms.lblTimer.setText("0");
 	}
 
 	/**
@@ -157,6 +157,7 @@ public class GUIKontroler {
 	 */
 	public static void pritisnutoPolje(int xp, int yp) {
 		if (prviPotez) {
+			t.start();
 			sk.postaviMine(xp, yp);
 			prviPotez = false;
 		}
@@ -201,6 +202,13 @@ public class GUIKontroler {
 							ms.matrica[x][y].removeMouseListener(ms.matrica[x][y].getMouseListeners()[0]);
 						} catch (Exception e) {
 						}
+						
+						if (ms.matrica[x][y].getIcon() != null) {
+							ms.matrica[x][y].setIcon(null);
+							brojPreostalih++;
+						}
+						
+						
 
 						ms.matrica[x][y].setBackground(java.awt.Color.white);
 						String t = Integer.toString(sk.getTabla().polja[x][y].getbrMinaOkolo());
@@ -242,11 +250,11 @@ public class GUIKontroler {
 				}
 
 				if (status == 1 && sk.getTabla().polja[x][y].isMina()) {
-					ms.matrica[x][y].setIcon(new ImageIcon(Minesweeper.class.getResource("/icons/915944-200.png")));
+					ms.matrica[x][y].setIcon(new ImageIcon(Minesweeper.class.getResource("/icons/mina.png")));
 				}
 
 				if (status == 2 && sk.getTabla().polja[x][y].isMina()) {
-					ms.matrica[x][y].setIcon(new ImageIcon(Minesweeper.class.getResource("/icons/915944-200.png")));
+					ms.matrica[x][y].setIcon(new ImageIcon(Minesweeper.class.getResource("/icons/mina.png")));
 				}
 			}
 	}
